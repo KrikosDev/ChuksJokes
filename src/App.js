@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 
 const MainBox = styled.div`
   display: flex;
   flex-flow: row wrap;
-  /* align-items: flex-start; */
   line-height: 1.25rem;
 
   button {
     position: sticky;
-    width: 240px;
+    width: 274px;
     padding: 16px;
     height: 80px;
     background-color: rgb(3, 253, 236);
@@ -49,16 +49,14 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'get' })
-  }, [])
+    dispatch({ type: 'get' });
+  }, []);
 
   return (
     <MainBox>
       <button onClick={() => dispatch({ type: 'kick' })}>MORE</button>
       {store.joke.map((item) => {
-        if(item) {
-          return <Joke>{item}</Joke>;
-        }
+        return <Joke key={uuidv4()}>{item}</Joke>;
       })}
     </MainBox>
   );

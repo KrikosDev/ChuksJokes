@@ -1,8 +1,5 @@
 import {
-  take,
   takeEvery,
-  takeLatest,
-  takeLeading,
   put,
   call,
 } from 'redux-saga/effects';
@@ -22,16 +19,17 @@ export function* getNewJoke() {
 }
 
 export function* getJokes() {
-  let data = localStorage.getItem("jokes");
-  let newData = JSON.parse(data);
-  
+  const data = localStorage.getItem('jokes');
+  if (data) {
+    const newData = JSON.parse(data);
 
-  yield put({ type: 'GET_JOKES', payload: newData.joke });
+    yield put({ type: 'GET_JOKES', payload: newData.joke });
+  }
 }
 
 export function* watchClickSaga() {
-  yield takeLatest('get', getJokes);
-  yield takeLatest('kick', getNewJoke);
+  yield takeEvery('get', getJokes);
+  yield takeEvery('kick', getNewJoke);
 }
 
 export default function* rootSaga() {

@@ -7,7 +7,7 @@ export default function reducer(state = initial, action) {
     case 'SET_JOKE': {
       localStorage.setItem(
         'jokes',
-        JSON.stringify({joke: [...state.joke, action.payload]})
+        JSON.stringify({ joke: [...state.joke, action.payload] })
       );
 
       return {
